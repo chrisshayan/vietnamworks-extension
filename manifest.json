@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+
+  "name": "VietnamWorks Smart Job Alert Notification",
+  "description": "This plugin is developed by VietnamWorks in order to simplify the process of finding dream job, this extension will look for your dream job.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "/assets/icon.png",
+    "default_popup": "popup.html"
+  },
+
+  "omnibox": { "keyword" : "job"},
+
+  "background": {
+    "scripts": [
+      "background.js",
+      "api.js"
+    ],
+    "persistent": false
+  },
+
+  "permissions": [
+    "activeTab"
+  ],
+
+  "options_page": "popup.html"
+}
