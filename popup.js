@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if(salary) {
             VietnamWorksJobAlert.settings.set('salary', salary);
+        } else {
+            VietnamWorksJobAlert.settings.set('salary', 0);
         }
 
         fetchJobs();
@@ -27,7 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('ja-category').value = VietnamWorksJobAlert.settings.get('category');
     document.getElementById('ja-joblevel').value = VietnamWorksJobAlert.settings.get('jobLevel');
     document.getElementById('ja-location').value = VietnamWorksJobAlert.settings.get('location');
-    document.getElementById('ja-salary').value = VietnamWorksJobAlert.settings.get('salary');
+
+    if(VietnamWorksJobAlert.settings.get('salary') != 0) {
+        document.getElementById('ja-salary').value = VietnamWorksJobAlert.settings.get('salary');
+    }
 
 
 }, false);
