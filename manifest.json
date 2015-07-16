@@ -21,7 +21,10 @@
   },
 
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "alarms",
+    "http://*/*",
+    "https://*/*"
   ],
 
   "options_page": "popup.html"

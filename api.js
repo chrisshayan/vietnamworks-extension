@@ -34,7 +34,7 @@ window.VietnamWorksJobAlert = (function() {
 var xhr = (function () {
     var xhr = new XMLHttpRequest();
 
-    return function (method, url, headers, cb) {
+    return function (method, url, headers, body, cb) {
         if (!cb && typeof headers === 'function') {
             cb = headers;
             headers = null;
@@ -56,25 +56,48 @@ var xhr = (function () {
         }
 
         xhr.setRequestHeader('If-Modified-Since', '');
-        xhr.send();
+
+        if(body) {
+            xhr.send(
+                JSON.stringify(body)
+            );
+        } else {
+            xhr.send();
+        }
     };
 })();
 
 
 function fetchJobs() {
-    var options = {
+    var headers = {
         "Content-type": "application/json",
         "Accept": "application/json",
-        "Content-md5": VietnamWorksJobAlert.settings.get('md5'),
-        "job_title": VietnamWorksJobAlert.settings.get('keyword')
+        "Content-md5": VietnamWorksJobAlert.settings.get('md5')
     };
 
-    xhr('GET', VietnamWorksJobAlert.settings.get('fetchUrl'), options, function (data, status, response) {
-        console.log(data);
-        console.log(status);
-        console.log(response);
-        chrome.browserAction.setBadgeText({text: VietnamWorksJobAlert.settings.get('keyword')});
+    var body = {
+        "job_title": String(VietnamWorksJobAlert.settings.get('keyword'))
+    };
+
+    xhr('POST', VietnamWorksJobAlert.settings.get('fetchUrl'), headers, body, function (data, status, response) {
+        var content = JSON.parse(data);
+        var condition = status == 200 && content.meta.message != 'Failed';
+        if(condition && content.data.total > 0) {
+            chrome.browserAction.setBadgeText(
+                {text: String(content.data.total)}
+            );
+        } else if(condition && content.data.total == 0) {
+            chrome.browserAction.setBadgeText(
+                {text: ''}
+            );
+
+        }
+
+        console.log(content);
     });
 }
+
+chrome.alarms.create({periodInMinutes: 1});
+chrome.alarms.onAlarm.addListener(fetchJobs);
 
 

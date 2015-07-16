@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setupJobAlertButton.addEventListener('click', function() {
         var keyword = document.getElementById('keyword').value;
         VietnamWorksJobAlert.settings.set('keyword', keyword);
-        alert(VietnamWorksJobAlert.settings.get('keyword'));
-
         fetchJobs();
     });
 }, false);
