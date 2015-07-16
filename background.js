@@ -9,8 +9,6 @@ chrome.omnibox.onInputChanged.addListener(function(text, suggest) {
     ]);
 });
 chrome.omnibox.onInputEntered.addListener(function(text) {
-    //alert('You just typed "' + text + '"');
-    alert(window.VietnamWorksJobAlert.settings.get('keyword'));
     chrome.browserAction.setBadgeText({text: window.VietnamWorksJobAlert.settings.get('keyword')});
 
 });
