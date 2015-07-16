@@ -7,6 +7,10 @@ window.VietnamWorksJobAlert = (function() {
       url: 'http://www.vietnamworks.com/',
       fetchUrl: 'https://api-staging.vietnamworks.com/jobs/search',
       keyword: '',
+      category: 0,
+      jobLevel: 0,
+      location: 0,
+      salary: 0,
       interval: 60,
       md5: '2ed19d9c84fa9280fe6fa1a9e58de807a9d076646de8327c53fc8ed64ca4e268'
   };
@@ -76,7 +80,11 @@ function fetchJobs() {
     };
 
     var body = {
-        "job_title": String(VietnamWorksJobAlert.settings.get('keyword'))
+        "job_title": String(VietnamWorksJobAlert.settings.get('keyword')),
+        "job_category": String(VietnamWorksJobAlert.settings.get('category')),
+        "job_level": String(VietnamWorksJobAlert.settings.get('jobLevel')),
+        "job_location": String(VietnamWorksJobAlert.settings.get('location')),
+        "job_salary": String(VietnamWorksJobAlert.settings.get('salary'))
     };
 
     xhr('POST', VietnamWorksJobAlert.settings.get('fetchUrl'), headers, body, function (data, status, response) {

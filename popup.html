@@ -4,18 +4,240 @@
     <title>VietnamWorks Smart Job Alert</title>
     <script src="api.js"></script>
     <script src="popup.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,500,300&amp;subset=latin,latin-ext,vietnamese"
+          rel="stylesheet" type="text/css">
+    <meta name="Robots" content="index, follow">
+    <meta name="Description"
+          content="Top job search, find jobs and career website in Vietnam. Find jobs and post resume to apply new jobs. Search jobs from 4,000+ new jobs updated daily.">
+    <meta name="Keywords"
+          content="vietnamworks, vietnamworks.com, jobs, search jobs, find jobs, vietnam job, recruitment, employment, career, executive jobs, job opportunities, job seeker, finding job, job site, online jobs, top jobs">
+    <meta name="format-detection" content="telephone=no">
+    <meta property="og:image" content="http://images.vietnamworks.com/img/thumbnail.png">
+    <meta property="og:title" content="Jobs, find jobs, job search, executive and manager jobs - VietnamWorks">
+    <meta property="og:url" content="http://www.vietnamworks.com/jobalert">
+    <meta property="og:title_name" content="www.vietnamworks.com">
+    <meta property="og:description"
+          content="Top job search, find jobs and career website in Vietnam. Find jobs and post resume to apply new jobs. Search jobs from 4,000+ new jobs updated daily.">
+
+    <link rel="stylesheet" type="text/css" href="http://www.vietnamworks.com/css/jobseekers/bootstrap.css?version=5">
+    <link rel="stylesheet" type="text/css" href="http://www.vietnamworks.com/css/jobseekers/theme.css?version=5">
 </head>
 <body>
-<h4>VietnamWorks Smart Job Alert</h4>
-<div>
-    <div class="form-group">
-        <label class="col-sm-3 control-label">Jobs</label>
-        <div class="col-sm-8">
-            <input id="keyword" type="text" placeholder="Job title or description. e.g. PHP Developer" name="keyword" maxlength="512" class="form-control" tabindex="1">
+<div class="row">
+    <div class="box box-lg">
+        <div class="alert alert-success" style="display: none;" id="message-box">
+            <div class="notice padding">
+                <strong></strong>
+            </div>
+        </div>
+        <div class="alert alert-danger" id="job_alert_error" style="display: none;"><strong id="job_alert_error_message"
+                                                                                            class="sprite_icon errorIcon">Sorry,
+            there are errors with the information you provided. Please scroll down to check for errors.</strong></div>
+        <div class="text-center">
+            <h1 class="">Let Your Dream Job Come To You!</h1>
+
+            <p class="lead text-center">As soon as a job matches your job critera below, you will be notified via
+                chrome. </p>
+        </div>
+        <div class="form-horizontal push-top-10">
+            <input type="hidden" name="currentLanguage" value="2">
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label">Notify Me Whenever</label>
+
+                <div class="col-sm-8">
+                    <input id="ja-title" type="text" placeholder="Job title or description. e.g. PHP Developer"
+                           name="keyword" maxlength="512" class="form-control" tabindex="1">
+                </div>
+                <input name="keyword_temp" type="hidden">
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">jobs in (category)<span class="text-danger">*</span></label>
+
+                <div class="col-sm-9">
+                    <select id="ja-category" class="form-control">
+                        <option value="0">All categories</option>
+                        <option value="1">Accounting</option>
+                        <option value="58">Auditing</option>
+                        <option value="67">Automotive</option>
+                        <option value="2">Administrative/Clerical</option>
+                        <option value="3">Advertising/Promotion/PR</option>
+                        <option value="4">Agriculture/Forestry</option>
+                        <option value="5">Architecture/Interior Design</option>
+                        <option value="22">Health/Medical Care</option>
+                        <option value="10">Arts/Design</option>
+                        <option value="42">Banking</option>
+                        <option value="43">Chemical/Biochemical</option>
+                        <option value="7">Civil/Construction</option>
+                        <option value="68">Industrial Products</option>
+                        <option value="8">Consulting</option>
+                        <option value="11">Customer Service</option>
+                        <option value="12">Education/Training</option>
+                        <option value="64">Electrical/Electronics</option>
+                        <option value="15">Entry level</option>
+                        <option value="16">Environment/Waste Services</option>
+                        <option value="17">Executive management</option>
+                        <option value="18">Expatriate Jobs in Vietnam</option>
+                        <option value="19">Export-Import</option>
+                        <option value="54">Food &amp; Beverage</option>
+                        <option value="59">Finance/Investment</option>
+                        <option value="63">Fashion/Lifestyle</option>
+                        <option value="66">High Technology</option>
+                        <option value="23">Human Resources</option>
+                        <option value="24">Insurance</option>
+                        <option value="47">Interpreter/Translator</option>
+                        <option value="55">IT - Hardware/Networking</option>
+                        <option value="57">Internet/Online Media</option>
+                        <option value="35">IT - Software</option>
+                        <option value="25">Legal/Contracts</option>
+                        <option value="62">Luxury Goods</option>
+                        <option value="65">Mechanical</option>
+                        <option value="27">Marketing</option>
+                        <option value="21">NGO/Non-Profit</option>
+                        <option value="28">Oil/Gas</option>
+                        <option value="6">Pharmaceutical/Biotech</option>
+                        <option value="69">Planning/Projects</option>
+                        <option value="26">Production/Process</option>
+                        <option value="49">Purchasing/Supply Chain</option>
+                        <option value="30">Real Estate</option>
+                        <option value="32">Retail/Wholesale</option>
+                        <option value="33">Sales</option>
+                        <option value="34">Sales Technical</option>
+                        <option value="56">Securities &amp; Trading</option>
+                        <option value="41">Telecommunications</option>
+                        <option value="51">Temporary/Contract</option>
+                        <option value="52">Textiles/Garments/Footwear</option>
+                        <option value="37">Airlines/Tourism/Hotel</option>
+                        <option value="48">TV/Media/Newspaper</option>
+                        <option value="36">Freight/Logistics</option>
+                        <option value="53">Warehouse</option>
+                        <option value="70">QA/QC</option>
+                        <option value="71">Overseas Jobs</option>
+                        <option value="39">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label" for="jobalert_joblevel">Job Level<span
+                        class="text-danger">*</span></label>
+
+                <div class="col-sm-9">
+                        <select id="ja-joblevel" class="form-control">
+                            <option value="0" selected="selected">All job levels</option>
+                            <option value="1">New Grad/Entry Level/Internship</option>
+                            <option value="5">Experienced (Non-Manager)</option>
+                            <option value="6">Team Leader/Supervisor</option>
+                            <option value="7">Manager</option>
+                            <option value="10">Vice Director</option>
+                            <option value="3">Director</option>
+                            <option value="4">CEO</option>
+                            <option value="8">Vice President</option>
+                            <option value="9">President</option>
+                        </select>
+                    </div>
+                    <span class="error-message" id="jobLevelErrorMessage"
+                          style="display: none;">Select one Job Level.</span>
+                </div>
+            </div>
+            <div class="form-group row job-location">
+                <label for="location" class="col-sm-3 control-label">that are located in</label>
+
+                <div class="col-sm-9">
+                    <select id="ja-location" class="form-control">
+                        <option value="0">All locations</option>
+                        <option value="29">Ho Chi Minh</option>
+                        <option value="24">Ha Noi</option>
+                        <option value="71">Mekong Delta</option>
+                        <option value="2">An Giang</option>
+                        <option value="3">Ba Ria - Vung Tau</option>
+                        <option value="4">Bac Can</option>
+                        <option value="5">Bac Giang</option>
+                        <option value="6">Bac Lieu</option>
+                        <option value="7">Bac Ninh</option>
+                        <option value="8">Ben Tre</option>
+                        <option value="9">Bien Hoa</option>
+                        <option value="10">Binh Dinh</option>
+                        <option value="11">Binh Duong</option>
+                        <option value="12">Binh Phuoc</option>
+                        <option value="13">Binh Thuan</option>
+                        <option value="14">Ca Mau</option>
+                        <option value="15">Can Tho</option>
+                        <option value="16">Cao Bang</option>
+                        <option value="17">Da Nang</option>
+                        <option value="18">Dac Lac</option>
+                        <option value="69">Dien Bien</option>
+                        <option value="19">Dong Nai</option>
+                        <option value="20">Dong Thap</option>
+                        <option value="21">Gia Lai</option>
+                        <option value="22">Ha Giang</option>
+                        <option value="23">Ha Nam</option>
+                        <option value="25">Ha Tay</option>
+                        <option value="26">Ha Tinh</option>
+                        <option value="27">Hai Duong</option>
+                        <option value="28">Hai Phong</option>
+                        <option value="30">Hoa Binh</option>
+                        <option value="31">Hue</option>
+                        <option value="32">Hung Yen</option>
+                        <option value="33">Khanh Hoa</option>
+                        <option value="34">Kon Tum</option>
+                        <option value="35">Lai Chau</option>
+                        <option value="36">Lam Dong</option>
+                        <option value="37">Lang Son</option>
+                        <option value="38">Lao Cai</option>
+                        <option value="39">Long An</option>
+                        <option value="40">Nam Dinh</option>
+                        <option value="41">Nghe An</option>
+                        <option value="42">Ninh Binh</option>
+                        <option value="43">Ninh Thuan</option>
+                        <option value="44">Phu Tho</option>
+                        <option value="45">Phu Yen</option>
+                        <option value="46">Quang Binh</option>
+                        <option value="47">Quang Nam</option>
+                        <option value="48">Quang Ngai</option>
+                        <option value="49">Quang Ninh</option>
+                        <option value="50">Quang Tri</option>
+                        <option value="51">Soc Trang</option>
+                        <option value="52">Son La</option>
+                        <option value="53">Tay Ninh</option>
+                        <option value="54">Thai Binh</option>
+                        <option value="55">Thai Nguyen</option>
+                        <option value="56">Thanh Hoa</option>
+                        <option value="57">Thua Thien-Hue</option>
+                        <option value="58">Tien Giang</option>
+                        <option value="59">Tra Vinh</option>
+                        <option value="60">Tuyen Quang</option>
+                        <option value="61">Kien Giang</option>
+                        <option value="62">Vinh Long</option>
+                        <option value="63">Vinh Phuc</option>
+                        <option value="65">Yen Bai</option>
+                        <option value="66">Other</option>
+                        <option value="70">International</option>
+                        <option value="72">Hau Giang</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="ja-salary" class="col-sm-3 control-label">with salary of</label>
+
+                <div class="col-sm-8">
+                    <input id="ja-salary" type="text" placeholder="Minimum monthly salary (USD)" name="salarymin"
+                           maxlength="6" class="form-control job-salary" tabindex="5">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 text-center">
+                    <input name="period" id="period" value="3" type="hidden">
+                    <button class="btn btn-primary btn-xlg" id="setupJobAlertButton" tabindex="7">Notify Me in Chrome</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<br/>
-<button id="setupJobAlertButton">Setup Your Smart Job Alert</button>
 </body>
 </html>
