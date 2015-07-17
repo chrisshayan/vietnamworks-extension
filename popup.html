@@ -1,7 +1,13 @@
 <!doctype html>
 <html>
 <head>
+    <style type="text/css">
+        html { width:400px; height:600px; }
+        body { height: 580px; }
+    </style>
     <title>VietnamWorks Smart Job Alert</title>
+    <script type="text/javascript" src="jquery-1.11.3.min.js"></script>
+    <script src="urlBuilder.js"></script>
     <script src="api.js"></script>
     <script src="popup.js"></script>
     <meta charset="utf-8">
@@ -28,13 +34,11 @@
     <link rel="stylesheet" type="text/css" href="http://www.vietnamworks.com/css/jobseekers/bootstrap.css?version=5">
     <link rel="stylesheet" type="text/css" href="http://www.vietnamworks.com/css/jobseekers/theme.css?version=5">
 </head>
-<body>
+<body style="margin-bottom: 0px;">
 <div class="row">
     <div class="box box-lg">
-        <div class="alert alert-success" style="display: none;" id="message-box">
-            <div class="notice padding">
-                <strong></strong>
-            </div>
+        <div class="notice padding text-center" id="viewJobsDiv" style="visibility: hidden">
+            <a class="btn btn-link center-block" id="viewAllJobsButton" style="width: 100%">View Jobs</a>
         </div>
         <div class="alert alert-danger" id="job_alert_error" style="display: none;"><strong id="job_alert_error_message"
                                                                                             class="sprite_icon errorIcon">Sorry,

@@ -5,14 +5,16 @@
 window.VietnamWorksJobAlert = (function() {
   var defaults = {
       url: 'http://www.vietnamworks.com/',
-      fetchUrl: 'https://api-staging.vietnamworks.com/jobs/search',
+      fetchUrl: 'https://api.vietnamworks.com/jobs/search',
       keyword: '',
       category: 0,
       jobLevel: 0,
       location: 0,
       salary: 0,
       interval: 60,
-      md5: '2ed19d9c84fa9280fe6fa1a9e58de807a9d076646de8327c53fc8ed64ca4e268'
+      numberMatchingJobs: 0,
+      utm: 'utm_source=JobAlertEmail&utm_medium=chrome&utm_campaign=viewall',
+      md5: ''
   };
 
   var api = {
@@ -91,9 +93,14 @@ function fetchJobs() {
         var content = JSON.parse(data);
         var condition = status == 200 && content.meta.message != 'Failed';
         if(condition && content.data.total > 0) {
+            VietnamWorksJobAlert.settings.set('numberMatchingJobs', content.data.total);
+
+            chrome.browserAction.setBadgeBackgroundColor({color:[65, 131, 196, 255]});
             chrome.browserAction.setBadgeText(
-                {text: String(content.data.total)}
+                {text: String(VietnamWorksJobAlert.settings.get('numberMatchingJobs'))}
             );
+
+            showHideViewAllButton();
         } else if(condition && content.data.total == 0) {
             chrome.browserAction.setBadgeText(
                 {text: ''}
@@ -105,7 +112,7 @@ function fetchJobs() {
     });
 }
 
-chrome.alarms.create({periodInMinutes: 1});
+chrome.alarms.create({periodInMinutes: VietnamWorksJobAlert.settings.get('interval')});
 chrome.alarms.onAlarm.addListener(fetchJobs);
 
 
