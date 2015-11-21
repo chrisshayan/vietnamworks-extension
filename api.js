@@ -14,7 +14,7 @@ window.VietnamWorksJobAlert = (function() {
       interval: 1, //in minutes
       numberMatchingJobs: 0,
       utm: 'utm_source=JobAlertEmail&utm_medium=chrome&utm_campaign=viewall',
-      md5: '3aada1c2587d584e330b04a88980a7653e8fcde6d30a441f68ce12e70bc84567',
+      md5: '',
       browserNotification: true
   };
 
