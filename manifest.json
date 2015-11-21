@@ -11,9 +11,18 @@
     "128": "/assets/vnw_logo_1024.png"
   },
 
+  "web_accessible_resources" : [
+    "/assets/vnw_logo_1024.png"
+  ],
+
   "browser_action": {
     "default_icon": "/assets/icon.png",
     "default_popup": "popup.html"
+  },
+
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
   },
 
   "background": {
@@ -29,6 +38,7 @@
     "tabs",
     "alarms",
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "notifications"
   ]
 }
