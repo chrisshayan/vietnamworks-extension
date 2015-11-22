@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Test Extension Options</title>
+    <style>
+        body: {
+            padding: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<label>
+    <input type="checkbox" id="browser-notification">
+    I like to receive notification in browser.
+</label>
+
+<br />
+<br />
+<label>
+    Every
+    <select id="minutes">
+        <option value="60">60 minutes, short and sweet</option>
+        <option value="90">90 minutes like a football match</option>
+        <option value="120">120 a football match with extra time</option>
+        <option value="240">240 very long but not as long as cricket</option>
+    </select>,
+     I like to synchronise and look for new jobs.
+</label>
+
+<div id="status" style="color: darkblue"> </div>
+
+<br/>
+<button id="save">Save My Changes</button>
+
+<script src="api.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

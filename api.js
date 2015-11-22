@@ -11,10 +11,11 @@ window.VietnamWorksJobAlert = (function() {
       jobLevel: 0,
       location: 0,
       salary: 0,
-      interval: 60,
+      interval: 60, //in minutes
       numberMatchingJobs: 0,
       utm: 'utm_source=JobAlertEmail&utm_medium=chrome&utm_campaign=viewall',
-      md5: ''
+      md5: '3aada1c2587d584e330b04a88980a7653e8fcde6d30a441f68ce12e70bc84567',
+      browserNotification: true
   };
 
   var api = {
@@ -90,10 +91,21 @@ function fetchJobs() {
     };
 
     xhr('POST', VietnamWorksJobAlert.settings.get('fetchUrl'), headers, body, function (data, status, response) {
+
         var content = JSON.parse(data);
         var condition = status == 200 && content.meta.message != 'Failed';
         if(condition && content.data.total > 0) {
             VietnamWorksJobAlert.settings.set('numberMatchingJobs', content.data.total);
+
+
+            if(VietnamWorksJobAlert.settings.get('browserNotification')) {
+                chrome.notifications.create('', {
+                    type: 'basic',
+                    iconUrl: '/assets/vnw_logo_1024.png',
+                    title: 'You\'ve Match!',
+                    message: 'You have '+content.data.total+' new matching jobs. Move up, dude!'
+                }, function(notificationId) {});
+            }
 
             chrome.browserAction.setBadgeBackgroundColor({color:[65, 131, 196, 255]});
             chrome.browserAction.setBadgeText(
@@ -108,11 +120,11 @@ function fetchJobs() {
 
         }
 
-        console.log(content);
+        //console.log(content);
     });
 }
 
-chrome.alarms.create({periodInMinutes: VietnamWorksJobAlert.settings.get('interval')});
+chrome.alarms.create({periodInMinutes: parseInt(VietnamWorksJobAlert.settings.get('interval'))});
 chrome.alarms.onAlarm.addListener(fetchJobs);
 
 
