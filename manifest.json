@@ -3,7 +3,7 @@
   "homepage_url": "http://www.vietnamworks.com",
   "name": "VietnamWorks Smart Job Alert Notification",
   "description": "In order to simplify the process of finding dream job, this extension will look for your dream job.",
-  "version": "1.0",
+  "version": "2.0",
 
   "icons" : {
     "16": "/assets/icon.png",
